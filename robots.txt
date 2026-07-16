@@ -1,0 +1,7 @@
+# GitHub Pages preview of the Préime site — NOT the production deployment.
+# Kept out of search results so it can't compete with the live domain as
+# duplicate content. The production copy (preime-html.zip) ships its own
+# permissive robots.txt; this file is applied by tools/publish-html.js and
+# only ever exists on the GitHub mirror.
+User-agent: *
+Disallow: /

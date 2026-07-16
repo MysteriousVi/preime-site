@@ -1,0 +1,40 @@
+/* Préime — static HTML build only.
+   Everything else lives in css/styles.css (a verbatim copy of the React app's
+   stylesheet). These few rules replace behaviour that Framer Motion provided at
+   runtime in the React version: the page enter/exit fade and the cookie bar's
+   slide-in. Loaded after styles.css. */
+
+/* --- page transition (was motion.main initial/animate/exit) --- */
+@keyframes preime-page-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+main.page-enter {
+  animation: preime-page-in .4s cubic-bezier(.22, 1, .36, 1) both;
+}
+body.page-leaving main {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .22s cubic-bezier(.22, 1, .36, 1),
+              transform .22s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* --- cookie bar (was AnimatePresence + motion.div) ---
+   Baked into every page but hidden; app.js reveals it only when there is no
+   stored choice, so it never flashes for returning visitors. */
+.cookie-bar {
+  opacity: 0;
+  transform: translateY(120px);
+  transition: opacity .4s cubic-bezier(.22, 1, .36, 1),
+              transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.cookie-bar.cookie-bar-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.page-enter { animation: none; }
+  body.page-leaving main { opacity: 1; transform: none; transition: none; }
+  .cookie-bar { transition: none; }
+}
