@@ -4234,10 +4234,13 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .page-dermaceuticals .dc-regen h2{
     width:794px;
     max-width:none;
-    height:150px;
-    margin:0 0 34px;
-    font-size:60px;
-    line-height:75px;
+    height:auto;
+    min-height:132px;
+    margin:0 0 30px;
+    /* 60px overflowed the 794px box to 3 lines and spilled onto the tab pills;
+       52px keeps "Regenerative DermaCeuticals" on line 1 like Figma (2 lines). */
+    font-size:52px;
+    line-height:66px;
   }
   .page-dermaceuticals .dc-regen .tabset-nav{width:647px;height:58px;margin:0 0 34px;gap:16px;flex-wrap:nowrap}
   .page-dermaceuticals .dc-regen .tabset-btn{height:58px;padding:0 20px;font-size:16px;white-space:nowrap}
@@ -4695,4 +4698,146 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .page-index .transforms .ba-tabs{flex-wrap:wrap;gap:10px}
   .page-index .transforms .ba-tab{padding:10px 16px;font-size:14px}
   .page-index .transforms .ba-caption{width:auto;max-width:none;font-size:14px;line-height:22px}
+}
+
+/* ============================================================
+   DermaCeuticals / Skin Analyzer / Nano Pen — Figma page pass
+   (nodes 8334:5762, 8334:9433, 10370:18370)
+
+   Figma uses a flat left-to-right lavender wash on these mid-page
+   sections — no dot pattern. The shared !important rule near the top
+   of this file dots .df-about/.dc-regen/.dp-tech, so re-flatten the
+   exact sections that carry dots here, page-scoped so DermaFacial,
+   product and blog pages keep their own treatment.
+   Wash sampled from the designs: #f0e2fc (left) -> #f6f1fc (right).
+   ============================================================ */
+.page-skin-analyzer .df-about,
+.page-skin-analyzer .dc-regen.skin-core,
+.page-nano-pen .df-about,
+.page-nano-pen .dp-tech,
+.page-nano-pen .dc-regen.nano-clinical,
+.page-dermaceuticals .df-about,
+.page-dermaceuticals .dc-regen{
+  background:linear-gradient(90deg,#f0e2fc 0%,#f6f1fc 100%) !important;
+}
+
+/* --- Nano Pen: Figma section details (node 10370:18370) --- */
+.page-nano-pen .nano-ideal{
+  color:var(--primary-500);font-weight:700;font-size:16px;margin:0 0 14px;
+}
+.page-nano-pen .nano-bullets{
+  list-style:disc;margin:0;padding:0 0 0 20px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.page-nano-pen .nano-bullets li{
+  color:var(--neutral-03);font-size:16px;line-height:1.5;padding-left:4px;
+}
+/* Key Features right side is a composed LED illustration on a light card,
+   so show it whole (contain) rather than cover-cropping it. */
+.page-nano-pen .nano-features-media-contain{
+  background:linear-gradient(150deg,#f3ecfa,#efe6f8);
+  display:flex;align-items:center;justify-content:center;
+}
+.page-nano-pen .nano-features-media-contain img{
+  width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box;
+}
+/* Clinical Applications: Figma places the image on the LEFT, copy on the right. */
+@media (min-width:901px){
+  .page-nano-pen .nano-clinical .dc-regen-grid{direction:rtl}
+  .page-nano-pen .nano-clinical .dc-regen-grid > *{direction:ltr}
+}
+
+/* --- Nano Pen: Benefits Over Traditional Tools — heading left, plain columns right (Figma) --- */
+@media (min-width:901px){
+  .page-nano-pen .nano-benefits-grid{
+    display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:40px;max-width:none;
+  }
+  .page-nano-pen .nano-benefits h2{
+    margin:0;text-align:left;color:#fff;font-family:var(--font-head);font-weight:500;
+    font-size:clamp(30px,3.2vw,44px);line-height:1.15;
+  }
+  .page-nano-pen .nano-benefits .np-compare{
+    grid-column:2 / 4;display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:none;margin:0;
+  }
+  .page-nano-pen .nano-benefits .np-col,
+  .page-nano-pen .nano-benefits .np-col.hl{
+    background:transparent;border:0;border-radius:0;padding:0;height:auto;width:auto;
+  }
+  .page-nano-pen .nano-benefits .np-col h4{font-size:19px;margin-bottom:16px;height:auto}
+  .page-nano-pen .nano-benefits .np-col ul{gap:12px}
+  .page-nano-pen .nano-benefits .np-col li{font-size:15px;height:auto;line-height:1.4;white-space:normal}
+}
+
+/* ============================================================
+   Skin Analyzer — Figma section builds (node 8334:9433)
+   ============================================================ */
+/* keep 4 Key Features on the flat lavender wash (its inline #fff bg was removed) */
+.page-skin-analyzer .skin-keyfeat{
+  background:linear-gradient(90deg,#f0e2fc 0%,#f6f1fc 100%) !important;
+}
+@media (min-width:901px){
+  /* Core Technologies: device image LEFT, "17 Skin Parameters" list RIGHT */
+  .page-skin-analyzer .skin-core .dc-regen-grid{direction:rtl}
+  .page-skin-analyzer .skin-core .dc-regen-grid > *{direction:ltr}
+}
+.page-skin-analyzer .skin-core-sub{
+  color:var(--primary-500);font-weight:700;font-size:16px;margin:0 0 18px;
+}
+.page-skin-analyzer .skin-params{
+  list-style:disc;margin:0;padding:0 0 0 20px;
+  columns:1;display:flex;flex-direction:column;gap:11px;
+}
+.page-skin-analyzer .skin-params li{color:var(--neutral-03);font-size:16px;line-height:1.4;padding-left:4px}
+.page-skin-analyzer .skin-core-media{background:transparent !important;border:0 !important;padding:0 !important}
+.page-skin-analyzer .skin-core-media img{max-height:380px;width:auto;margin:0 auto}
+
+/* 4 Key Features: white rounded card, check bullets, then 3 captioned phones */
+.page-skin-analyzer .skin-keyfeat-card{
+  background:#fff;border-radius:28px;padding:52px 56px 56px;
+  box-shadow:0 24px 60px rgba(87,59,126,.08);
+}
+.page-skin-analyzer .skin-keyfeat-card > h2{
+  font-family:var(--font-head);font-weight:500;color:var(--primary-500);
+  font-size:clamp(30px,3.4vw,48px);line-height:1.15;margin:0 0 26px;
+}
+.page-skin-analyzer .skin-keyfeat-list{list-style:none;margin:0 0 44px;padding:0;display:flex;flex-direction:column;gap:16px}
+.page-skin-analyzer .skin-keyfeat-list li{display:flex;align-items:flex-start;gap:12px;font-size:16px;line-height:1.5;color:var(--neutral-03)}
+.page-skin-analyzer .skin-keyfeat-list strong{color:var(--primary-500)}
+.page-skin-analyzer .skin-keyfeat-list .df-check{flex:0 0 auto;margin-top:2px}
+.page-skin-analyzer .skin-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;justify-items:center}
+.page-skin-analyzer .skin-shots figure{margin:0;text-align:center;max-width:280px}
+.page-skin-analyzer .skin-shots img{width:100%;border-radius:22px;display:block}
+.page-skin-analyzer .skin-shots figcaption{margin-top:16px;color:var(--neutral-03);font-size:18px}
+
+/* Handheld skin microimager: solid purple card on the lavender wash */
+.page-skin-analyzer .skin-handheld{
+  background:linear-gradient(90deg,#f0e2fc 0%,#f6f1fc 100%) !important;
+  color:inherit;display:flex;align-items:center;
+}
+.page-skin-analyzer .skin-handheld-card{
+  position:relative;overflow:hidden;
+  background:#7c5197;border-radius:30px;
+  padding:52px 60px;color:#fff;
+}
+.page-skin-analyzer .shh-copy{max-width:70%}
+.page-skin-analyzer .skin-handheld-card h2{
+  font-family:var(--font-head);font-weight:700;font-size:clamp(30px,3.4vw,46px);
+  line-height:1.1;margin:0 0 16px;color:#fff;
+}
+.page-skin-analyzer .shh-sub{font-weight:700;font-size:19px;margin:0 0 22px;color:#fff}
+.page-skin-analyzer .shh-lead{font-weight:700;font-size:17px;margin:0 0 12px;color:#fff}
+.page-skin-analyzer .shh-list{list-style:disc;margin:0;padding:0 0 0 20px;display:flex;flex-direction:column;gap:12px}
+.page-skin-analyzer .shh-list li{font-size:16px;line-height:1.45;color:rgba(255,255,255,.92)}
+.page-skin-analyzer .shh-list strong{color:#fff;font-weight:700}
+.page-skin-analyzer .shh-wand{
+  position:absolute;right:36px;bottom:28px;width:270px;height:auto;
+  mix-blend-mode:normal;pointer-events:none;
+}
+@media (max-width:900px){
+  .page-skin-analyzer .skin-core .dc-regen-grid{direction:ltr}
+  .page-skin-analyzer .skin-keyfeat-card{padding:30px 22px}
+  .page-skin-analyzer .skin-shots{grid-template-columns:1fr;gap:26px}
+  .page-skin-analyzer .shh-copy{max-width:100%}
+  .page-skin-analyzer .shh-wand{position:static;width:150px;margin:20px auto 0;display:block}
+  .page-skin-analyzer .skin-handheld-card{padding:34px 24px}
 }
