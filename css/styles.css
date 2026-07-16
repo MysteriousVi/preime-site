@@ -4357,6 +4357,11 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .page-dermaceuticals .dc-why .df-benefits .btn{height:40px;margin-top:12px;padding:0 16px;font-size:12px}
   .page-dermaceuticals .dc-stats5{height:434px;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);gap:8px}
   .page-dermaceuticals .dc-stats5 .df-stat{min-height:0;padding:20px;border:0;border-radius:12px;box-shadow:none}
+  /* Figma highlights only the first stat (3X) in purple; the global
+     .df-stat pale !important rule was flattening it. Others stay pale. */
+  .page-dermaceuticals .dc-stats5 .df-stat:first-child{background:linear-gradient(47deg,#573b7e 0%,#9d6be4 100%) !important}
+  .page-dermaceuticals .dc-stats5 .df-stat:first-child .num{color:#fff}
+  .page-dermaceuticals .dc-stats5 .df-stat:first-child p{color:rgba(255,255,255,.92)}
   .page-dermaceuticals .dc-stats5 .df-stat:last-child{grid-column:span 2}
   .page-dermaceuticals .dc-stats5 .num{font-size:36px}
   .page-dermaceuticals .dc-stats5 .df-stat p{font-size:12px;line-height:18px}
@@ -4382,8 +4387,11 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .page-dermaceuticals .dc-results-grid{width:1220px;height:542px;min-height:0;margin:30px 0 0;grid-template-columns:796px 400px;gap:24px}
   .page-dermaceuticals .dc-results-grid .ba-slider{width:796px;height:542px;border-radius:18px}
   .page-dermaceuticals .dc-results-grid .dc-pure-card{width:400px;height:520px;padding:28px;border-radius:18px;box-sizing:border-box}
-  .page-dermaceuticals .dc-results .pp-rel-grid{width:1216px;height:382px;min-height:0;margin:30px 0 0;grid-template-columns:repeat(4,1fr);gap:30px;overflow:hidden}
-  .page-dermaceuticals .dc-results .pp-rel-card{width:281px;height:382px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+  /* Cards size to content and top-align — a fixed 382px card + overflow:hidden
+     clipped the second line of longer descriptions ("Human Exosome Regeneration
+     Serum") and any card whose text ran past the 64px left under the 318px vial. */
+  .page-dermaceuticals .dc-results .pp-rel-grid{width:1216px;min-height:0;margin:30px 0 0;grid-template-columns:repeat(4,1fr);gap:30px;align-items:start;overflow:visible}
+  .page-dermaceuticals .dc-results .pp-rel-card{width:281px;height:auto;padding:0 0 4px;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
   .page-dermaceuticals .dc-results .pp-rel-media{width:281px;height:318px;padding:0;border-radius:12px;background:#f5f2f8}
   .page-dermaceuticals .dc-results .pp-rel-media img{width:100%;height:100%;max-height:none;object-fit:contain}
   .page-dermaceuticals .dc-results .pp-rel-card h4{margin:14px 0 0;font-size:16px;line-height:20px}
