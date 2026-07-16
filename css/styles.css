@@ -4890,3 +4890,128 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 .page-blogs .bl-posts .blog-read{
   display:inline-block;margin:2px 4px 0;color:var(--primary-500);font-weight:700;font-size:14px;
 }
+
+/* ============================================================
+   Regenerative Actives family — Figma pass (9337:3211 + actives)
+   ============================================================ */
+/* hero: Figma places the text block just right of the model's face
+   (~22% in), not in the right half */
+@media (min-width:901px){
+  /* .ra-hero-inner is flex (justify-content:flex-end by default); Figma puts
+     the text block just right of the model's face, ~22% in from the left */
+  .ra-hero-inner{justify-content:flex-start}
+  .ra-hero-text{max-width:640px;margin-left:18%;text-align:left}
+}
+/* key-actives cards: icons sit in a soft rounded chip per Figma */
+.ra-ico{
+  width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(150deg,#f3ecfb,#e9defa);color:var(--primary-500);margin-bottom:14px;
+}
+/* Redefining band: plain text link + big transparent bottles per Figma */
+.ra-discover-link{display:inline-block;margin-top:6px;font-weight:600;color:var(--neutral-03)}
+.ra-discover-link:hover{color:var(--primary-500)}
+.ra-redefine-media.ra-bottles{background:none;border:none;box-shadow:none;padding:0}
+.ra-redefine-media.ra-bottles img{width:100%;max-width:450px;border-radius:18px}
+
+/* actives detail pages */
+.active-scope-icon svg{display:block}
+.active-scope-item.hl{background:#fff;box-shadow:0 10px 26px rgba(87,59,126,.08)}
+.active-dots{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:8px}
+.active-dots li{position:relative;padding-left:18px;color:var(--black-500);font-weight:600;font-size:16px;line-height:1.45}
+.active-dots li::before{content:"•";position:absolute;left:4px;color:var(--black-500)}
+.active-dots li strong{font-weight:700}
+.active-adv-media.active-adv-photo{background:none;padding:0;overflow:hidden;border-radius:24px}
+.active-adv-media.active-adv-photo img{width:100%;height:100%;max-height:none;object-fit:cover;display:block}
+.active-family-media{background:none !important;border:none;box-shadow:none;padding:0 !important;overflow:hidden;border-radius:24px}
+.active-family-media img{width:100%;display:block;border-radius:24px}
+/* Clinically Proven card (human exosomes) */
+.active-clin{background:linear-gradient(90deg,#f0e2fc 0%,#f6f1fc 100%)}
+.active-clin-card{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;
+  border-radius:28px;padding:56px 60px;
+  background:linear-gradient(115deg,rgba(255,255,255,.72),rgba(244,236,252,.55));
+  border:1px solid rgba(255,255,255,.8);
+}
+.active-clin-card h2{font-family:var(--font-head);font-weight:500;color:var(--primary-500);font-size:clamp(32px,3.6vw,52px);line-height:1.15;margin-bottom:18px}
+.active-clin-card p{color:var(--neutral-03);font-size:16px;line-height:1.6;margin-bottom:14px;max-width:560px}
+.active-clin-media img{width:100%;border-radius:20px;display:block}
+@media (max-width:900px){
+  .active-clin-card{grid-template-columns:1fr;padding:28px 22px}
+}
+
+/* ============================================================
+   Become a Provider — rebuilt to Figma 8334:24162
+   ============================================================ */
+.bp2-hero{
+  padding:74px 0 78px;text-align:center;color:#fff;
+  background:
+    radial-gradient(40% 60% at 85% 20%, rgba(196,120,230,.4) 0%, transparent 65%),
+    radial-gradient(36% 52% at 10% 85%, rgba(120,70,190,.55) 0%, transparent 65%),
+    linear-gradient(118deg,#5b2fa0 0%,#6e3ab4 48%,#7d43c4 100%);
+}
+.bp2-hero h1{font-family:var(--font-head);font-weight:500;font-size:clamp(32px,3.4vw,46px);margin-bottom:14px}
+.bp2-hero p{max-width:640px;margin:0 auto;color:rgba(255,255,255,.9);font-size:16px;line-height:1.6}
+.bp2-enquiries{padding:88px 0;background:linear-gradient(90deg,#f0e2fc 0%,#f4ebfc 50%,#f6f1fc 100%)}
+.bp2-enquiries-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.bp2-details h2{font-family:var(--font-head);font-weight:500;color:var(--primary-500);font-size:clamp(30px,3vw,42px);margin-bottom:14px}
+.bp2-intro{color:var(--neutral-03);font-size:16px;margin-bottom:30px}
+.bp2-contact{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:24px}
+.bp2-contact li{display:flex;gap:16px;align-items:flex-start}
+.bp2-contact li svg{flex:0 0 auto;width:22px;height:22px;color:var(--black-500);margin-top:3px}
+.bp2-contact li span{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--neutral-03);margin-bottom:4px}
+.bp2-contact li a,.bp2-contact li p{color:var(--black-500);font-size:15.5px;font-weight:600;line-height:1.5;margin:0}
+.bp2-form{
+  background:#fff;border-radius:18px;padding:34px 36px 30px;
+  box-shadow:0 24px 60px rgba(87,59,126,.12);
+  display:flex;flex-direction:column;gap:16px;
+}
+.bp2-form h3{font-family:var(--font-head);font-weight:700;color:var(--black-500);font-size:20px}
+.bp2-form-sub{color:var(--neutral-03);font-size:13.5px;margin:-8px 0 2px}
+.bp2-form label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700;color:var(--black-500)}
+.bp2-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bp2-form input,.bp2-form select,.bp2-form textarea{
+  width:100%;border:1px solid #e4dced;border-radius:10px;background:#fff;
+  padding:12px 14px;font-family:var(--font-body);font-size:14px;color:var(--black-500);
+}
+.bp2-form textarea{resize:vertical}
+.bp2-form input:focus,.bp2-form select:focus,.bp2-form textarea:focus{outline:none;border-color:var(--primary-400)}
+.bp2-submit{justify-content:center;background:var(--primary-500);color:#fff;font-weight:700;border-radius:10px;padding:14px 20px;margin-top:6px}
+.bp2-submit:hover{filter:brightness(1.08)}
+.bp2-help{padding:0 0 96px;background:linear-gradient(90deg,#f0e2fc 0%,#f4ebfc 50%,#f6f1fc 100%)}
+.bp2-help-card{
+  position:relative;overflow:visible;border-radius:26px;color:#fff;
+  padding:56px 480px 56px 56px;min-height:230px;
+  background:linear-gradient(115deg,#5b2fa0 0%,#8d55d7 100%);
+}
+.bp2-help-card h2{font-family:var(--font-head);font-weight:700;font-size:clamp(28px,2.8vw,38px);margin-bottom:26px}
+.bp2-contact-light li svg{color:#fff;background:rgba(255,255,255,.16);border-radius:50%;width:40px;height:40px;padding:9px;margin-top:0}
+.bp2-contact-light li span{color:rgba(255,255,255,.75)}
+.bp2-contact-light li a{color:#fff}
+.bp2-help-photo{
+  position:absolute;right:44px;bottom:0;width:420px;max-width:44%;
+  display:block;pointer-events:none;
+}
+@media (max-width:900px){
+  .bp2-enquiries{padding:56px 0}
+  .bp2-enquiries-grid{grid-template-columns:1fr;gap:40px}
+  .bp2-form-row{grid-template-columns:1fr}
+  .bp2-help-card{padding:36px 26px 220px}
+  .bp2-help-photo{right:50%;transform:translateX(50%);width:300px;max-width:80%}
+}
+
+/* ============================================================
+   Blogs — Figma's rich 3-column footer, on this page only.
+   The markup already exists (Footer.jsx renders the mobile
+   directory on every page); we just swap which set shows.
+   ============================================================ */
+@media (min-width:901px){
+  .route-blogs .footer-cols{display:none}
+  .route-blogs .footer-mobile-directory{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;flex:1;
+  }
+  .route-blogs .footer-mobile-pair{display:contents}
+  .route-blogs .footer-mobile-col h4{color:#fff;font-size:15.5px;margin-bottom:14px}
+  .route-blogs .footer-mobile-col a{display:block;color:rgba(255,255,255,.72);font-size:14px;line-height:1.5;margin-bottom:10px}
+  .route-blogs .footer-mobile-col a:hover{color:#fff}
+  .route-blogs .footer-contact .footer-mobile-only{display:flex}
+}
