@@ -2279,7 +2279,7 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 
 /* The current Figma blog page uses a taller post field, a full newsletter block, and a 594px footer. */
 .page-blogs .blog{height:1420px;box-sizing:border-box}
-.page-blogs .bl-news{height:684px;box-sizing:border-box}
+.page-blogs .bl-news{height:auto;box-sizing:border-box;margin-top:0;padding-top:26px;padding-bottom:96px}
 .route-blogs .site-footer{min-height:594px;box-sizing:border-box;background:#241734}
 .route-blogs .footer-inner{padding-top:108px;padding-bottom:60px}
 .route-blogs .footer-by{display:none}
@@ -4897,10 +4897,12 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 /* hero: Figma places the text block just right of the model's face
    (~22% in), not in the right half */
 @media (min-width:901px){
-  /* .ra-hero-inner is flex (justify-content:flex-end by default); Figma puts
-     the text block just right of the model's face, ~22% in from the left */
+  /* Figma places the model tight against the left edge with the text just
+     right of her face. The bg asset frames her wider than the Figma art,
+     so shift the art left and start the text clear of her face. */
+  .page-regen .ra-hero{background-position:-280px center}
   .ra-hero-inner{justify-content:flex-start}
-  .ra-hero-text{max-width:640px;margin-left:18%;text-align:left}
+  .ra-hero-text{max-width:600px;width:auto;margin-left:28%;margin-right:24px;text-align:left}
 }
 /* key-actives cards: icons sit in a soft rounded chip per Figma */
 .ra-ico{
@@ -4988,8 +4990,9 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 .bp2-contact-light li span{color:rgba(255,255,255,.75)}
 .bp2-contact-light li a{color:#fff}
 .bp2-help-photo{
-  position:absolute;right:44px;bottom:0;width:420px;max-width:44%;
-  display:block;pointer-events:none;
+  position:absolute;right:44px;bottom:0;width:470px;max-width:46%;
+  display:block;pointer-events:none;   /* card overflow stays visible so the
+                                          heads rise above the top edge (Figma) */
 }
 @media (max-width:900px){
   .bp2-enquiries{padding:56px 0}
