@@ -4967,8 +4967,11 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   width:81px;height:42px;border-radius:21px;
   background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.6);box-shadow:none;
 }
-.ba-label-before{left:auto;right:84px}
-.ba-label-after{right:auto;left:calc(var(--ba-pct,50%) + 83px)}
+.ba-slider .ba-label-before{left:auto;right:84px}
+.ba-slider .ba-label-after{right:auto;left:calc(var(--ba-pct,50%) + 83px)}
+/* static before/after images (product pages) keep edge labels */
+.pd-ba .ba-label-before{left:24px;right:auto}
+.pd-ba .ba-label-after{right:24px;left:auto}
 
 /* ---- index */
 .page-index .tailored .section-title{font-weight:500}
@@ -5145,7 +5148,9 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 .bp2-help-card h2{font-size:clamp(30px,3vw,42px)}
 
 /* ---- blogs */
-.page-blogs .bl-hero{background:linear-gradient(115deg,#4d2f80 0%,#5b3796 55%,#6a3fae 100%) !important}
+.page-blogs .bl-hero{
+  background:url('../assets/bl-hero-bg.jpg') center/cover no-repeat !important;
+}
 .page-blogs .bl-hero h1{font-weight:600}
 .page-blogs .bl-posts-panel{background:rgba(255,255,255,.72);border-radius:24px;padding:34px}
 .page-blogs .bl-posts .blog-card h3{font-size:20px;color:#5a3d8f}
@@ -5190,4 +5195,94 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   content:"";position:absolute;bottom:-4px;left:7%;width:131px;height:87px;
   background:url('../assets/blog-orn-bottom.png') center/contain no-repeat;pointer-events:none;
   mix-blend-mode:multiply;
+}
+
+/* ============================================================
+   R3 FIXPACK — product pages, NP/blogs desktop, mobile parity.
+   ============================================================ */
+
+/* ---- product pages (desktop) */
+.pp-breadcrumb{background:#f3edf9;padding:14px 0;font-size:14px}
+.pp-tab-pill{padding:14px 24px;font-size:16px;border-radius:999px}
+.pp-hero-text h1{font-size:clamp(34px,3.2vw,46px)}
+.pp-split h2{font-weight:600}
+.pp-ing-section .section-title{font-weight:500}
+.page-product-dc .pp-clinical-panel{background:none;border:0;box-shadow:none;padding:0}
+.page-product-dc .pp-clinical-section .section-title{font-size:clamp(30px,3.2vw,42px)}
+.pd-ba{aspect-ratio:auto;min-height:500px;max-height:none}
+.pd-ba img{height:100%;object-fit:cover}
+.pd-ba .ba-label{font-size:34px}
+.pd-ba .ba-label-before{left:25%;right:auto;transform:translate(-50%,-50%)}
+.pd-ba .ba-label-after{left:75%;right:auto;transform:translate(-50%,-50%)}
+.pd-ba::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.85);transform:translateX(-50%)}
+.pd-ba::after{
+  content:"‹  ›";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:76px;height:40px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.6);
+  color:#fff;font-size:18px;letter-spacing:8px;text-indent:6px;
+}
+.pp-dp-overview .pp-overview-media{background:none}
+.pp-dp-overview .pp-overview-media img{max-height:520px;width:auto;margin:0 auto}
+.pp-dp-who .pp-dp-list li .df-check{display:none}
+.pp-dp-who .pp-dp-list li{display:list-item;list-style:disc;margin-left:18px}
+.pp-dp-intro{font-weight:700}
+.pp-dp-use ol li{border:0}
+.pp-dp-use .pp-dp-use-panel > p{font-weight:700}
+
+/* ---- nano-pen desktop */
+.page-nano-pen .device-fullhero .df-btn-grad{
+  background:linear-gradient(28deg,var(--primary-500),#7f63a6);color:#fbf9f5;border:0;
+}
+.page-nano-pen .df-about{
+  background:linear-gradient(180deg,#f6eefc,#f2e8fb) !important;
+}
+.page-nano-pen .pp-rel-card.figma-card{background:#efe6f9;border-radius:18px;overflow:hidden}
+.page-nano-pen .pp-rel-card.figma-card .pp-rel-media{padding:14px}
+.page-nano-pen .figma-card-copy h4{font-size:22px;color:var(--primary-500)}
+
+/* ---- blogs desktop */
+.page-blogs .bl-hero h1{font-weight:500;font-size:clamp(30px,3vw,42px)}
+.page-blogs .bl-posts .blog-media{height:160px}
+.page-blogs .bl-posts .blog-card h3{font-size:20px}
+.page-blogs .bl-news-panel::before{height:104%;bottom:0;background-position:left bottom;background-size:auto 104%}
+
+/* ---- MOBILE PARITY (Figma 393 frames) */
+@media (max-width:760px){
+  /* home hero: text first, image below */
+  .page-index .hero{display:flex;flex-direction:column-reverse}
+  /* about hero: rounded bottom, no overlap */
+  .page-about .about-hero img,.page-about .ab-hero img{border-radius:0 0 26px 26px}
+  /* portfolio must stack (about was rendering 3 slivers) */
+  .portfolio-grid{grid-template-columns:1fr !important}
+  .portfolio .pc-media{height:auto}
+  .pc-desc{-webkit-line-clamp:2}
+  /* blog & news: horizontal 2-up carousel per figma */
+  .blog-grid{display:flex !important;gap:16px;overflow-x:auto;width:auto !important;
+    margin:32px 0 0 !important;height:auto !important;padding-bottom:8px;
+    scroll-snap-type:x proximity}
+  .blog-card{flex:0 0 300px !important;width:300px !important;height:auto !important;scroll-snap-align:start}
+  .blog-media{width:100% !important;height:210px !important}
+  .blog .section-sub{display:none}
+  /* science numbered cards: compact like figma */
+  .page-index .science .feature-card{min-height:220px}
+  .page-index .science-pill{background:none;box-shadow:none;padding:0;font-weight:700}
+  /* tailored: photo after heading, then toggle; contact us visible */
+  .page-index .tailored-grid{display:flex;flex-direction:column}
+  .page-index .tailored-media{order:0;margin-top:6px}
+  .page-index .tailored-body{order:1}
+  .page-index .tailored .toggle{margin-top:8px}
+  /* transforms: button under content */
+  .page-index .transforms-head{flex-direction:column;align-items:flex-start}
+  .page-index .transforms .discover-btn{order:9;align-self:center;margin-top:18px}
+  .page-index .transforms .ba-tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%}
+  /* hamburger: figma 2-line mark */
+  .hamburger span:nth-child(2){width:16px;margin-left:8px}
+  .hamburger span:nth-child(3){display:none}
+  .hamburger{gap:7px}
+  /* footer: never clamp the description */
+  .footer-desc{display:block;-webkit-line-clamp:unset;max-height:none;overflow:visible}
+  /* origin: figma small centered copy */
+  .origin p{font-size:14px;text-align:center}
+  .origin .btn{display:table;margin:14px auto 0}
+  .origin .eyebrow-chip{display:table;margin:0 auto 14px;font-size:12px;white-space:nowrap}
 }
