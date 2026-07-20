@@ -524,7 +524,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .origin .origin-grid{grid-template-columns:380px 1fr;gap:36px}
 }
 @media (max-width:760px){
-  .about-hero{padding-top:40px;min-height:clamp(620px,120vw,760px);background-size:auto 100%;background-position:center bottom;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
+  /* figma m_2810: text clear on lavender, trio photo below at full width */
+  .about-hero{padding-top:40px;min-height:clamp(600px,158vw,660px);background-size:100% auto,cover;background-position:center bottom,center;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
   .about-hero-faces{margin-top:26px}
   .origin .origin-grid{grid-template-columns:1fr;gap:28px;padding:28px 20px}
   .origin-media{order:-1}
@@ -975,8 +976,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .dev-feat-grid{grid-template-columns:1fr 1fr}
   .bp-form .row{grid-template-columns:1fr}
   .bl-news-form{flex-direction:column}
-  .bl-news-panel{padding:260px 24px 34px;text-align:center}
-  .bl-news-panel::before{left:50%;transform:translateX(-50%);bottom:auto;top:8px;width:360px;height:250px;background-size:360px auto;background-position:center bottom}
+  /* figma m_20512: content first, trio photo at the bottom of the panel */
+  .bl-news-panel{padding:34px 24px 0;text-align:left}
+  .bl-news-panel::before{display:none}
+  .bl-news-panel::after{content:"";display:block;width:calc(100% + 48px);margin:26px -24px 0;height:300px;
+    background:url('../assets/bl-news-photo.png') center top/cover no-repeat;border-radius:0 0 28px 28px}
   .bl-news-panel p,.bl-news-form{margin-left:auto;margin-right:auto}
 }
 
@@ -4855,7 +4859,7 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 .bp2-contact-light li span{color:rgba(255,255,255,.75)}
 .bp2-contact-light li a{color:#fff}
 .bp2-help-photo{
-  position:absolute;right:44px;bottom:0;width:470px;max-width:46%;
+  position:absolute;right:44px;bottom:0;width:520px;max-width:48%;
   display:block;pointer-events:none;   /* card overflow stays visible so the
                                           heads rise above the top edge (Figma) */
 }
@@ -5128,10 +5132,8 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 
 /* ---- become-a-provider */
 .bp2-hero{
-  background:
-    linear-gradient(100deg,rgba(64,34,110,.82),rgba(96,58,158,.66)),
-    url('../assets/bp-hero-bg.jpg') center/cover no-repeat;
-  padding:96px 0 100px;
+  background:url('../assets/bp-hero-bg.jpg') center/cover no-repeat;
+  padding:132px 0 136px;
 }
 .bp2-hero p{max-width:640px}
 .bp2-enquiries{
@@ -5185,16 +5187,16 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .page-blogs .bl-cat:nth-child(4),.page-blogs .bl-cat:nth-child(5){grid-column:span 3}
 }
 .page-blogs .bl-news-panel{position:relative;overflow:visible}
-.page-blogs .bl-news-panel::after{
-  content:"";position:absolute;top:-88px;right:22%;width:103px;height:93px;
-  background:url('../assets/blog-orn-top.png') center/contain no-repeat;pointer-events:none;
-  mix-blend-mode:multiply;
-}
-.page-blogs .bl-news{position:relative}
-.page-blogs .bl-news::after{
-  content:"";position:absolute;bottom:-4px;left:7%;width:131px;height:87px;
-  background:url('../assets/blog-orn-bottom.png') center/contain no-repeat;pointer-events:none;
-  mix-blend-mode:multiply;
+/* Figma 10370:20771 — glass ornament halves anchored to the panel edges:
+   bowl above the top edge at ~73% across, stem below the bottom-left.
+   Rendered as real imgs (feathered alpha) so they track the panel exactly. */
+.page-blogs .bl-orn{position:absolute;pointer-events:none;user-select:none}
+.page-blogs .bl-orn-top{width:160px;height:136px;right:190px;bottom:100%;margin:0}
+.page-blogs .bl-orn-bot{width:160px;height:95px;left:60px;top:100%}
+.page-blogs .bl-news{padding-bottom:100px}
+@media (max-width:760px){
+  .page-blogs .bl-orn{display:none}
+  .page-blogs .bl-news{padding-bottom:60px}
 }
 
 /* ============================================================
@@ -5241,10 +5243,45 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
 .page-nano-pen .figma-card-copy h4{font-size:22px;color:var(--primary-500)}
 
 /* ---- blogs desktop */
-.page-blogs .bl-hero h1{font-weight:500;font-size:clamp(30px,3vw,42px)}
+.page-blogs .bl-hero h1{font-weight:500;font-size:clamp(28px,2.6vw,36px)}
 .page-blogs .bl-posts .blog-media{height:160px}
 .page-blogs .bl-posts .blog-card h3{font-size:20px}
-.page-blogs .bl-news-panel::before{height:104%;bottom:0;background-position:left bottom;background-size:auto 104%}
+/* Newsletter panel — exact geometry from the Figma master (panel 1279x523,
+   photo flush left 710px full height, content column starts at 717px) */
+@media (min-width:761px){
+  .page-blogs .bl-news-panel{min-height:523px;padding:54px 61px 54px 717px}
+  .page-blogs .bl-news-panel::before{
+    width:710px;height:100%;left:0;bottom:0;
+    background:url('../assets/bl-news-photo.png') left bottom/cover no-repeat;
+    border-radius:28px 0 0 28px;
+  }
+}
+/* Latest Posts cards — figma: image band 333px, panel pad 24, gaps 50x23 */
+.page-blogs .bl-posts-panel{padding:24px}
+@media (min-width:761px){
+  .page-blogs .bl-posts.blog-grid,.page-blogs .bl-posts{gap:50px 23px}
+}
+@media (min-width:761px){
+  /* 1fr = minmax(auto,1fr): the 333px imgs' intrinsic width blows the tracks
+     past the panel — pin the min to 0 so 3 columns always fit */
+  .page-blogs .bl-posts{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .page-blogs .bl-posts > *{min-width:0}
+}
+@media (min-width:761px){
+  .page-blogs .bl-posts .blog-media{height:333px;border-radius:12px;overflow:hidden}
+  .page-blogs .bl-posts .blog-media img{width:100%;height:100%;object-fit:cover}
+}
+.page-blogs .bl-posts .blog-card h3{font-size:21px;font-weight:700;color:#6b46a8}
+.page-blogs .bl-posts .blog-card p{font-size:17px;color:#23202b}
+.page-blogs .bl-posts .blog-read{font-size:16px;font-weight:700;color:#2a2340}
+.page-blogs .bl-cat p{font-size:16px;max-width:360px;margin-left:auto;margin-right:auto}
+@media (min-width:761px){
+  .page-blogs .bl-cats-head h2{font-size:40px;font-weight:600}
+}
+@media (max-width:760px){
+  .page-blogs .bl-cats-head h2{font-size:28px;font-weight:600;white-space:normal;text-align:center}
+  .page-blogs .bl-cats-mol{display:none}
+}
 
 /* ---- MOBILE PARITY (Figma 393 frames) */
 @media (max-width:760px){
@@ -5285,4 +5322,630 @@ button.bl-cat{width:100%;font-family:inherit;cursor:pointer;display:block}
   .origin p{font-size:14px;text-align:center}
   .origin .btn{display:table;margin:14px auto 0}
   .origin .eyebrow-chip{display:table;margin:0 auto 14px;font-size:12px;white-space:nowrap}
+}
+
+/* ============================================================
+   R4 FIXPACK — product detail pages, figma-exact scale pass
+   (dc: 8334:12170, dp: 10370:14180). Desktop only.
+   ============================================================ */
+@media (min-width:901px){
+  /* hero: figma H1 ~48px over 3 lines in a ~520px column */
+  .page-product .pp-hero-text h1{font-size:48px;line-height:1.32;max-width:490px}
+  .page-product .pp-tag{font-size:16px;line-height:1.55;max-width:520px}
+
+  /* breadcrumb: lavender strip, 14px */
+  .page-product .pp-breadcrumb{font-size:14px}
+
+  /* what-is-it body copy */
+  .page-product .pp-split h2{font-size:40px;font-weight:600}
+  .page-product .pp-split p{font-size:17px;line-height:1.6}
+
+  /* dc ingredient feature: one soft card, image flush right (figma) */
+  .page-product-dc .pp-ing-feature{
+    position:relative;display:grid;grid-template-columns:minmax(0,1fr) 56%;
+    align-items:center;gap:0;padding:0;overflow:hidden;border-radius:24px;
+    background:linear-gradient(135deg,#fbf9fe 0%,#f2eafb 100%);
+    box-shadow:0 18px 44px rgba(87,59,126,.10);min-height:430px;
+  }
+  .page-product-dc .pp-ing-feature > div:first-child{padding:48px 16px 48px 56px}
+  .page-product-dc .pp-ing-feature h3{font-size:22px}
+  .page-product-dc .pp-ing-media{height:100%;border-radius:0;overflow:hidden;background:none;padding:0}
+  .page-product-dc .pp-ing-media img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+
+  /* clinical section: figma-scale heading, tabs, panel */
+  .page-product-dc .pp-clinical-section .section-title{font-size:clamp(36px,3.3vw,47px);font-weight:500;color:#332c40}
+  .page-product .pp-tab-pill{padding:14px 26px;font-size:16px}
+  .page-product-dc .pp-clinical-panel{display:grid;grid-template-columns:minmax(0,1fr) 615px;gap:64px;align-items:start;max-width:none}
+  .page-product-dc .pd-ba{min-height:0;height:540px}
+  .page-product-dc .pd-ba img{width:100%;height:100%;object-fit:cover}
+  .page-product-dc .pp-clinical-panel h3{font-size:38px;font-weight:500;color:#4b2e83}
+  .page-product-dc .pp-results{gap:16px}
+  .page-product-dc .pp-result{padding:24px 22px}
+  .page-product-dc .pp-metric{font-size:30px}
+  .page-product-dc .pp-result p{font-size:15px}
+  .page-product-dc .pd-ba{min-height:540px}
+
+  /* dp what-is-it: free-standing bottle cutout */
+  .pp-dp-overview .pp-overview-media{background:none;box-shadow:none;aspect-ratio:auto}
+  .pp-dp-overview .pp-overview-media img{max-height:470px;width:auto;object-fit:contain}
+
+  /* dp who it's for */
+  .pp-dp-who h2{font-size:40px}
+  .pp-dp-intro{font-size:16px}
+  .pp-dp-list li{font-size:15px;line-height:1.7}
+  .pp-dp-who-media img{border-radius:16px}
+
+  /* dp key ingredients: image lives inside the one white card */
+  .pp-dp-ingredients{position:relative;background:#fff;border-radius:24px;overflow:hidden;
+    display:grid;grid-template-columns:minmax(0,44%) 1fr;align-items:stretch;gap:0;
+    box-shadow:0 18px 44px rgba(87,59,126,.08)}
+  .pp-dp-ingredients > div:first-child{padding:56px}
+  .pp-dp-ingredients h2{font-size:38px}
+  .pp-dp-ingredient-list h3{font-size:17px}
+  .pp-dp-ingredient-list p{font-size:14px}
+  .pp-dp-ingredients-media{height:100%;border-radius:0;margin:0}
+  .pp-dp-ingredients-media img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+
+  /* dp how to use: inner bordered panel, bold 2-line intro, no dividers */
+  .pp-dp-use-panel{border:1px solid #e7defa;border-radius:18px;
+    background:linear-gradient(180deg,#fcfbff,#f6f1fd);padding:40px 44px}
+  .pp-dp-use-panel h2{font-size:36px}
+  .pp-dp-use-panel > p{font-weight:700;font-size:15px;max-width:270px}
+  .pp-dp-use ol li{border:0;font-size:15px}
+  .pp-dp-use-panel ol{border-top:0;padding-top:4px}
+  .pp-dp-use-checks{border-top:0;margin-top:10px}
+  .pp-dp-use-checks p{font-size:15px}
+
+  /* provider CTA on product pages: figma scale */
+  .pp-provider-panel{max-width:1180px;padding:64px 88px;
+    background:rgba(255,255,255,.13);border:1.5px solid rgba(255,255,255,.5)}
+  .pp-provider-panel h2{font-size:clamp(30px,2.9vw,40px)}
+  .pp-provider-panel p{font-size:16px}
+}
+
+/* R4 — mobile blogs per figma m_20512 */
+@media (max-width:760px){
+  .page-blogs .bl-filterbar select{display:none}
+  .page-blogs .bl-filterbar{width:100%}
+  .page-blogs .bl-search,.page-blogs .bl-search input{width:100%}
+  .page-blogs .bl-posts{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:26px 12px}
+  .page-blogs .bl-posts > *{min-width:0}
+  .page-blogs .bl-posts .blog-card{min-width:0;display:block}
+  .page-blogs .bl-posts .blog-media{height:150px;border-radius:10px;overflow:hidden}
+  .page-blogs .bl-posts .blog-media img{width:100%;height:100%;object-fit:cover}
+  .page-blogs .bl-posts .blog-card h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .page-blogs .bl-posts .blog-card p{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .page-blogs .bl-posts .blog-tag{display:none}
+  .page-blogs .bl-posts-panel{padding:0;background:none;box-shadow:none;border-radius:0}
+}
+
+/* R4 — mobile SA (figma m_8691) + DP (figma m_6813) structure */
+@media (max-width:760px){
+  /* SA: comparison shots = compact 3-up row ABOVE the key-features card */
+  .skin-keyfeat > .container{display:flex;flex-direction:column}
+  .skin-keyfeat .skin-shots{order:-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 26px}
+  .skin-keyfeat .skin-shots figure{margin:0}
+  .skin-keyfeat .skin-shots img{width:100%;height:auto;border-radius:10px}
+  .skin-keyfeat .skin-shots figcaption{font-size:10px;text-align:center;margin-top:6px}
+  /* SA: handheld microimager card compact, wand beside text */
+  .page-skin-analyzer .skin-handheld-card{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:12px;align-items:center;padding:24px 18px}
+  .page-skin-analyzer .skin-handheld-card .shh-wand{position:static;width:96px;height:auto;margin:0;transform:none}
+  .page-skin-analyzer .skin-handheld-card .shh-list li{font-size:13px}
+  /* DP: key technologies tiles 2-up like figma */
+  .page-dermaprofessional .dp-tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .page-dermaprofessional .dp-tech-grid .feature-card{min-height:200px}
+  .page-dermaprofessional .dp-tech-grid .fc-text h4{font-size:16px}
+  .page-dermaprofessional .dp-tech-grid .fc-text p{font-size:11px}
+  /* DP: explore products = 2-col compact cards, first two + View More */
+  .page-dermaprofessional .dc-results .pp-rel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .page-dermaprofessional .dc-results .pp-rel-grid .pp-rel-card:nth-child(n+3){display:none}
+  .page-dermaprofessional .dc-results .figma-card .pp-rel-media,
+  .page-dermaprofessional .dc-results .pp-rel-media{height:190px;width:auto;aspect-ratio:auto}
+  .page-dermaprofessional .dc-results .figma-card .pp-rel-media img{max-height:180px;width:auto;margin:0 auto;height:auto}
+  .page-dermaprofessional .dc-results .pp-rel-card h3,
+  .page-dermaprofessional .dc-results .pp-rel-card h4{font-size:15px}
+  .page-dermaprofessional .dc-results .figma-card-copy{font-size:12px}
+}
+
+/* ============================================================
+   R5 FIXPACK — fleet findings round (index, about)
+   ============================================================ */
+/* index desktop: science CTAs (figma: vivid violet primary w/ arrow, visible outline) */
+.page-index .science-actions .btn-primary{background:linear-gradient(135deg,#8a55d3,#7a4dba)}
+.page-index .science-actions .btn-outline{border:1.5px solid #7a4dba;color:#5b3a91}
+.page-index .tailored-grid{align-items:center}
+/* portfolio desc: real 2-line clamp WITH ellipsis (was height-cut mid-sentence) */
+.portfolio .pc-desc{
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;height:auto;max-height:49px;
+}
+/* about hero: uniform heading color (figma: no italic/dark on "Science.") + lavender tint */
+.page-about .about-hero .hi{font-style:normal;color:inherit;background:inherit;-webkit-background-clip:inherit}
+/* keep the trio bg image; only deepen the lavender tint under it (figma ~#f0e2fc) */
+.page-about .about-hero{
+  background:
+    url('../assets/about-hero-bg-figma.png') center top/100% auto no-repeat,
+    radial-gradient(120% 95% at 50% 0%, #ead9fb 0%, #f0e2fc 50%, #f6effc 100%);
+}
+/* about innovation banner: texture larger/left so it shows through the glass */
+.page-about .innovation{background-position:left center;background-size:cover}
+
+@media (max-width:760px){
+  /* index hero: figma composite asset, flush full width */
+  .page-index .hero-media img{width:100%;height:auto;display:block}
+  /* tailored: no clipped heading, room for Contact Us */
+  .page-index .tailored .section-title{font-size:24px;line-height:1.3;margin-bottom:10px}
+  .page-index .tailored-grid,.page-index .tailored-body{height:auto !important;overflow:visible !important}
+  .page-index .tailored-body .btn{display:inline-flex;margin-top:14px}
+  .page-index .tailored-body p{font-size:14px}
+  /* portfolio cards: figma 13px centered desc */
+  .pc-desc{font-size:13px !important;max-height:40px}
+  /* about hero: paragraph clear of the photo */
+  .page-about .about-hero-sub{margin-bottom:18px}
+  .page-about .about-hero-faces{margin-top:6px}
+  .page-about .about-hero-faces img{border-radius:0 0 26px 26px}
+  /* about portfolio: solid white Explore pill below the image */
+  .page-about .product-card .pc-link,.page-index .product-card .pc-link{
+    position:static;transform:none;display:table;margin:12px auto 0;background:#fff;
+    box-shadow:0 6px 18px rgba(87,59,126,.14);padding:10px 22px;border-radius:999px;
+  }
+  /* about innovation: glass card near full width */
+  .page-about .innovation-card,.page-about .inno-card{width:100%;max-width:none}
+  /* about origin: compact one-line badge + heading */
+  .page-about .origin-pill{font-size:10px;padding:6px 12px;display:table;margin:0 auto 12px;white-space:nowrap}
+  .page-about .origin h2,.page-about .origin .section-title{font-size:26px;text-align:center}
+  /* about blog header: centered + subtitle visible */
+  .page-about .blog .section-title{text-align:center;font-size:26px;font-weight:600}
+  .page-about .blog .section-sub{display:block;text-align:center;font-size:14px}
+  /* blog cards: figma compact 220px cards, 1-line ellipsis desc */
+  .page-about .blog-card{flex:0 0 220px !important;width:220px !important}
+  .page-about .blog-media{height:150px !important}
+  .page-about .blog-card p{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;font-size:13px}
+  .page-about .blog-card h3{font-size:15px}
+  /* about body copy scale */
+  .page-about .origin p,.page-about .inno-card p,.page-about .innovation p{font-size:14px}
+}
+
+/* R5b — about hero mobile: text on lavender, trio anchored to hero bottom */
+@media (max-width:760px){
+  .page-about .about-hero{
+    background:
+      url('../assets/about-hero-mobile.jpg') center bottom/100% auto no-repeat,
+      radial-gradient(120% 95% at 50% 0%, #ead9fb 0%, #f0e2fc 50%, #f6effc 100%);
+    min-height:0;padding-bottom:466px;
+  }
+}
+/* R5b — index mobile hero: show the full figma composite (no square crop) */
+@media (max-width:760px){
+  .page-index .hero .hero-media{height:auto !important;aspect-ratio:auto !important}
+  .page-index .hero .hero-media img{width:100% !important;height:auto !important;object-fit:contain !important}
+}
+
+
+/* R5-dermafacial */
+/* header CTA pill: light lavender fill per Figma (was white/transparent .btn-outline) */
+.btn-provider-desktop{background:#ede6fa}
+
+/* DF about/tech backgrounds: Figma flat left-to-right lavender wash (#f0e2fc->#f6f1fc,
+   sampled from figma_dermafacial.png) with near-invisible dots — overrides the
+   .09-alpha dotted rule in the earlier "---- dermafacial" fixpack */
+.page-dermafacial .df-about,
+.page-dermafacial .df-tech{
+  background:
+    radial-gradient(circle at 30px 30px,rgba(126,92,171,.05) 0 11px,transparent 12px) 0 0/72px 72px,
+    linear-gradient(90deg,#f0e2fc 0%,#f6f1fc 100%) !important;
+}
+
+@media (min-width:901px){
+  /* 5 Technologies: Figma heading measures 1210px wide at 1440 (live 1018 @49px) -> ~58px */
+  .page-dermafacial .df-tech h2{font-size:clamp(40px,4vw,58px)}
+  /* selector pills: Figma 57px tall (live 42px) */
+  .page-dermafacial .df-tab{padding:15px 22px;font-size:17px}
+  /* "Proof in Every Treatment": plain eyebrow text, no pill chrome (Figma desktop) */
+  .page-dermafacial .df-diff-head .eyebrow-chip{
+    background:transparent;border:0;box-shadow:none;padding:0;
+    font-size:14px;margin-bottom:10px;
+  }
+}
+
+@media (max-width:760px){
+  /* hero: stacked + centered, full device render below the CTA (figma m_3751).
+     Composite bg sliced to its swirl-only right side; df-device.png un-hidden. */
+  .page-dermafacial .df-hero{background:url('../assets/dermafacial-hero-bg-figma.png') right center/cover no-repeat}
+  .page-dermafacial .df-hero-inner{flex-direction:column;justify-content:flex-start;padding-top:30px}
+  .page-dermafacial .df-hero-text{width:100%;margin:0;order:0}
+  .page-dermafacial .df-hero-text h1{font-size:32px;margin-bottom:10px}
+  .page-dermafacial .df-hero-text p{font-size:14px;margin-bottom:20px}
+  .page-dermafacial .df-hero .df-hero-media{display:flex;order:2;width:100%;padding:20px 0 8px}
+  .page-dermafacial .df-hero .df-hero-media img{width:auto;max-width:80%;max-height:500px}
+
+  /* about card: opaque white, single column, treatment photo full width on top */
+  .page-dermafacial .df-about-grid{grid-template-columns:1fr;gap:20px;background:#fff;padding:20px 20px 32px}
+  .page-dermafacial .df-about-media{order:-1;flex-direction:column;position:static;width:100%}
+  .page-dermafacial .df-about-media img{width:100%;max-width:none;height:auto}
+  .page-dermafacial .df-about-media .img-treat{aspect-ratio:5/4;object-fit:cover;border-radius:16px}
+
+  /* 5 technologies header: left-aligned heading + one scrollable pill row (figma) */
+  .page-dermafacial .df-tech h2{text-align:left;font-size:30px;line-height:1.2}
+  .page-dermafacial .df-tech-tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+  .page-dermafacial .df-tab{flex:0 0 auto;padding:14px 26px;font-size:16px}
+
+  /* tech card: opaque white, media above the copy per figma */
+  .page-dermafacial .df-tech-panel.active{grid-template-columns:1fr;gap:16px;background:#fff;padding:26px 20px 34px}
+  .page-dermafacial .df-tech-panel .df-tech-media{order:-1}
+  .page-dermafacial .df-tech-panel .df-tech-media img{max-height:210px}
+
+  /* combination therapy: centered copy on gradient card, portrait BELOW the text
+     (photo-as-background removed so nothing overlaps the copy) */
+  .page-dermafacial .df-comb .df-comb-grid{
+    min-height:0;padding:34px 22px 0;
+    background:linear-gradient(180deg,#f6f0fd 0%,#e4ddfb 40%,#e0d9fb 100%);
+  }
+  .page-dermafacial .df-comb .df-comb-text{max-width:none;text-align:center}
+  .page-dermafacial .df-comb .df-comb-text h2{font-size:30px}
+  .page-dermafacial .df-comb .df-comb-text p{font-size:14px;max-width:none}
+  .page-dermafacial .df-comb .df-comb-media{display:block !important;margin:0 -22px;min-height:0;border-radius:0;overflow:visible}
+  .page-dermafacial .df-comb .df-comb-media picture{display:block;width:100%}
+  .page-dermafacial .df-comb .df-comb-media img{display:block;width:100%;height:auto;min-height:0}
+
+  /* results eyebrow: small tinted chip per figma mobile (copy stays contextual) */
+  .page-dermafacial .df-diff-head .eyebrow-chip{
+    background:var(--primary-50);border:0;box-shadow:none;
+    font-size:11px;padding:6px 12px;
+  }
+}
+
+
+/* R5-dermaceuticals */
+
+/* d3/m7(1) — "Proof in Every Treatment" eyebrow pill above the Proven Results heading */
+.dc-results-eyebrow{display:inline-block;background:#fbf7f5;color:var(--primary-500);font-weight:600;font-size:14px;line-height:1;padding:8px 14px;border-radius:999px;margin-bottom:18px}
+
+/* d6/m8 — thumbnail category chips + rounded purple selected state (Figma #6E4A9F border) */
+.page-dermaceuticals .dc-results .pp-rel-media{position:relative}
+.pp-rel-tag{position:absolute;top:14px;left:14px;z-index:2;background:#fff;border:1px solid #eceaf1;border-radius:999px;padding:5px 12px;font-size:12.5px;line-height:1.2;font-weight:600;color:#262233;box-shadow:0 2px 8px rgba(40,20,70,.1);white-space:nowrap}
+.page-dermaceuticals .pp-rel-grid .pp-rel-card:first-child{outline:none}
+.page-dermaceuticals .dc-results .pp-rel-card:first-child .pp-rel-media{box-shadow:inset 0 0 0 2px #6e4a9f}
+
+/* d7 — Pure Exosome card: button directly under bullets, larger arrows anchored at card bottom */
+.page-dermaceuticals .dc-pure-card .dc-pure-foot{flex:1 1 auto;justify-content:space-between}
+.page-dermaceuticals .dc-pure-arrows{gap:16px}
+.page-dermaceuticals .dc-pure-arrow{width:56px;height:56px}
+.page-dermaceuticals .dc-pure-arrow svg{width:22px;height:22px}
+
+/* d1 — "5+" stat card uses the light variant; only the 3X card stays purple-filled */
+.page-dermaceuticals .dc-stats5 .df-stat.alt:last-child{background:#fff !important}
+.page-dermaceuticals .dc-stats5 .df-stat.alt:last-child .num{color:var(--primary-500) !important}
+.page-dermaceuticals .dc-stats5 .df-stat.alt:last-child p{color:var(--primary-500) !important}
+
+@media (min-width:901px){
+  /* d4 — stat description size/colour per Figma (16px, #573B7E); 3X keeps its white text via :first-child rule */
+  .page-dermaceuticals .dc-stats5 .df-stat{padding:18px 20px}
+  .page-dermaceuticals .dc-stats5 .df-stat p{font-size:16px;line-height:22px;color:var(--primary-500)}
+  /* d3 — room for the added eyebrow row inside the fixed-height results shell */
+  .page-dermaceuticals .dc-results{height:1550px;min-height:1550px}
+  .page-dermaceuticals .dc-results>.container{height:1390px}
+}
+
+@media (max-width:760px){
+  /* m0 — stacked hero: centered text on lavender, full-width bottles render below (Figma m_4872) */
+  .page-dermaceuticals .dc-hero{height:570px;min-height:570px;padding-top:0;background:url('../assets/dc-hero-mobile.png') center bottom/100% auto no-repeat,linear-gradient(180deg,#ececf7 0%,#e9e4f4 100%)}
+  .page-dermaceuticals .dc-hero-inner{min-height:0}
+  .page-dermaceuticals .dc-hero-text{position:relative;left:auto;top:auto;width:100%;max-width:361px;margin:36px auto 0;padding:0;background:transparent;backdrop-filter:none;border-radius:0;text-align:center}
+  .page-dermaceuticals .dc-hero-text h1{font-size:34px;line-height:41px;margin-bottom:12px}
+  .page-dermaceuticals .dc-hero-text p{font-size:15px;line-height:22px;margin:0 auto 20px;max-width:340px}
+
+  /* m1 — anchor the About treatment photo inside its card (abs-positioned media was escaping to page top) */
+  .page-dermaceuticals .df-about-grid{position:relative}
+  /* m10 — un-clip the About paragraph so "…devices and procedures." renders */
+  .page-dermaceuticals .df-about-body{height:auto}
+  .page-dermaceuticals .df-about-body p{height:auto;overflow:visible}
+
+  /* m5 — left-align the Bespoke header per Figma */
+  .page-dermaceuticals .dc-bespoke .section-title{text-align:left}
+  .page-dermaceuticals .dc-bespoke .section-sub{text-align:left;margin-left:0;margin-right:0}
+
+  /* m6 — "Best for": purple bold label on its own line, description beneath, inside card padding */
+  .page-dermaceuticals .dc-bcard-best{display:grid;gap:2px;width:324px;margin:16px auto 0;padding:0 0 20px;color:var(--primary-500);font-size:14px;line-height:20px}
+  .page-dermaceuticals .dc-bcard-best strong{font-size:15px;line-height:22px}
+
+  /* m13 — fill the bespoke card image area like Figma (no letterboxing) */
+  .page-dermaceuticals .dc-bcard .bmedia img{object-fit:cover}
+
+  /* m2/m7/m8/m9 — Proven Results: purple card above the slider, auto heights (stops the
+     "View Product details" pill overflowing onto the thumbnails), Figma thumbnail cards, View More */
+  .page-dermaceuticals .figma-pale-band{height:auto;min-height:3237px}
+  .page-dermaceuticals .dc-results{height:auto;min-height:0;padding:24px 16px 40px}
+  .page-dermaceuticals .dc-results>.container{height:auto}
+  .page-dermaceuticals .dc-results-grid{display:flex;flex-direction:column;height:auto;min-height:0}
+  .page-dermaceuticals .dc-results-grid .dc-pure-card{order:0;height:auto;min-height:0;margin-top:0;padding:24px 20px}
+  .page-dermaceuticals .dc-results-grid .ba-slider{order:1;margin-top:16px}
+  .page-dermaceuticals .dc-pure-card h3{font-size:22px;line-height:1.25}
+  .page-dermaceuticals .dc-pure-card .dc-pure-foot{margin-top:20px}
+  .page-dermaceuticals .dc-pure-arrow{width:52px;height:52px}
+  .page-dermaceuticals .dc-results .pp-rel-grid{width:361px;height:auto;min-height:0;margin:24px 0 0;overflow-x:auto;overflow-y:hidden;padding-bottom:4px}
+  .page-dermaceuticals .dc-results .pp-rel-card{flex:0 0 214px;width:214px;height:auto;padding:0;border:0;background:transparent;box-shadow:none}
+  .page-dermaceuticals .dc-results .pp-rel-media{width:214px;height:214px;padding:0;border-radius:14px;background:#f5f2f8;margin-bottom:0}
+  .page-dermaceuticals .dc-results .pp-rel-media img{max-height:180px;width:auto}
+  .page-dermaceuticals .dc-results .pp-rel-card h4{margin:12px 0 0;font-size:16px;line-height:20px;color:#241d31}
+  .page-dermaceuticals .dc-results .pp-rel-card p{margin:4px 0 0;font-size:13px;line-height:18px}
+  .page-dermaceuticals .dc-viewmore{display:flex;justify-content:center;margin-top:24px}
+  .pp-rel-tag{top:12px;left:12px;font-size:12px}
+  .dc-results-eyebrow{background:#f3e7e0;margin-bottom:14px}
+
+  /* m3 — Figma mobile FAQ has no intro CTA; it was overlapping the first accordion item */
+  .page-dermaceuticals .df-step-intro .btn{display:none}
+
+  /* m12 — dark solid "Contact us" pill per Figma (#302045) */
+  .page-dermaceuticals .provider-foot a{background:var(--primary-800)}
+}
+
+
+/* R5-products */
+/* dc + dp product detail pages vs Figma 8334:12170 / 10370:14180 (desktop) and m_5930 / m_7841 (mobile) */
+
+/* -- figma dot texture restored on the What Is It / Key Ingredients bands (dc) and What Is It (dp);
+      beats the `background:transparent!important` reset at the 3381/3383 fixpack (same specificity, later) */
+.page-product-dc .pp-overview,
+.page-product-dc .pp-ing-section{
+  background:
+    radial-gradient(circle at 24px 24px,rgba(126,92,171,.09) 0 9px,transparent 10px) 0 0/48px 48px,
+    linear-gradient(180deg,#fbf6ff 0%,#f2e5fc 100%)!important;
+}
+.page-product-dp .pp-dp-overview{
+  background:
+    radial-gradient(circle at 32px 32px,rgba(126,92,171,.10) 0 11px,transparent 12px) 0 0/64px 64px,
+    linear-gradient(180deg,#f7f0fe 0%,#f0e4fc 100%)!important;
+}
+
+/* -- dc mobile hero title: figma two-tone (Préime #6a4999, DermaCeuticals lighter gradient) */
+.pp-title-dc-mobile{color:#6a4999}
+.pp-title-dc-mobile .pp-title-grad{background:linear-gradient(98deg,#8b64d0 0%,#7c55b4 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* -- provider CTA contact row: pin icon + dark Contact us pill (figma) */
+.pp-provider-contact{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:20px;color:rgba(255,255,255,.85);font-size:15px}
+.pp-provider-contact svg{flex:0 0 auto}
+.pp-provider-contact .pp-contact-pill{margin-left:4px;padding:9px 20px;border-radius:999px;background:#2b2140;color:#fff;font-size:13.5px;font-weight:700;border-bottom:0}
+
+@media (min-width:901px){
+  /* breadcrumb strip full-bleed like figma (live had ~90px white gutters) */
+  .page-product .pp-hero>.container:first-child{max-width:none;padding:0;background:#f3edf9}
+  .page-product .pp-breadcrumb{height:48px;max-width:1440px;margin:0 auto;padding:0 clamp(20px,5.5vw,80px);align-items:center}
+
+  /* figma type scale: section headings measure ~58px in both masters (live 36-47px) */
+  .page-product .pp-hero-text h1{font-size:clamp(40px,3.96vw,57px);line-height:1.2;max-width:660px}
+  .page-product .pp-split h2{font-size:clamp(40px,4vw,58px);font-weight:500;line-height:1.12}
+  .page-product-dc .pp-clinical-section .section-title{font-size:clamp(40px,4vw,58px);line-height:1.28;color:var(--primary-500)}
+  .page-product-dc .pp-clinical-panel h3{font-size:clamp(38px,4vw,58px);font-weight:500;line-height:1.1;color:var(--primary-500);margin-bottom:26px}
+
+  /* dc What Is It: taller near-square droplet image + roomier band (figma image ~485x490, card ~620 tall) */
+  .page-product-dc .pp-overview{height:720px}
+  .page-product-dc .pp-overview .pp-overview-media{aspect-ratio:1/1;max-height:490px}
+
+  /* dc Key Ingredients feature card: container-wide (~1320px in figma vs 1120 live), 600px tall,
+     image inset ~26px with its own rounded corners instead of bleeding flush */
+  .page-product-dc .pp-ing-section{height:900px}
+  .page-product-dc .pp-ing-feature{height:600px;max-width:none;padding:26px;grid-template-columns:minmax(0,1fr) 43%}
+  .page-product-dc .pp-ing-feature>div:first-child{padding:24px 40px 24px 44px}
+  .page-product-dc .pp-ing-feature h3{font-size:26px}
+  .page-product-dc .pp-ing-feature p{font-size:16px;max-width:520px}
+  .page-product-dc .pp-ing-media{border-radius:18px}
+  .page-product-dc .pp-ing-media img{border-radius:18px}
+
+  /* dp What Is It: transparent cutout bottle at figma size (~528px tall) */
+  .pp-dp-overview .pp-overview-media img{max-height:530px}
+
+  /* dp stray full-width halftone row above Key Ingredients: kill the leftover dotted section bg
+     (desktop only — the mobile fixpack paints the purple who-band on this section) */
+  .page-product-dp .pp-dp-who-section{background:transparent!important}
+
+  /* dp headings to figma scale + proportional body/bullets */
+  .pp-dp-who h2,.pp-dp-ingredients h2,.pp-dp-use-panel h2{font-size:clamp(40px,4vw,58px);line-height:1.1}
+  .pp-dp-intro{font-size:18px}
+  .pp-dp-list li{font-size:17px;line-height:1.6}
+  .page-product-dp .pp-dp-ingredients-section{height:590px}
+  .page-product-dp .pp-dp-ingredients{height:520px}
+  .pp-dp-ingredient-list{gap:16px}
+  .pp-dp-ingredient-list h3{font-size:19px}
+  .pp-dp-ingredient-list p{font-size:15px}
+  .pp-dp-use-panel>p{font-size:17px;max-width:320px}
+  .pp-dp-use ol li{font-size:16px}
+  .pp-dp-use-checks p{font-size:16px}
+  .pp-provider-panel h2{font-size:clamp(36px,4vw,58px)}
+  .pp-provider-panel p{font-size:18px}
+  .pp-provider-contact{font-size:16px}
+}
+
+@media (max-width:760px){
+  /* dc Expected Results: un-clip the reference frame so the last card row + disclaimer render
+     (fixed heights + overflow:hidden were cutting them off) */
+  .page-product-dc .pp-clinical-section{height:auto!important;overflow:visible}
+  .page-product-dc .pp-clinical-section>.container{height:auto}
+  .page-product-dc .pp-clinical-panel{height:auto}
+  .page-product-dc .pp-clinical-panel>div:first-child{height:auto}
+  .page-product-dc .pp-results{height:auto;grid-template-rows:auto auto}
+  .page-product-dc .pp-result{height:auto;min-height:130px}
+  .page-product-dc .pp-disclaimer{height:auto;margin-top:18px}
+
+  /* clinical bg: figma mobile shows the orb/bubble artwork more visibly */
+  .page-product-dc .pp-clinical-section{
+    background:
+      linear-gradient(180deg,rgba(245,238,245,.62),rgba(246,239,255,.62)),
+      url('../assets/figma-pale-bubbles.webp') center/cover no-repeat!important;
+  }
+
+  /* tab row: figma mobile has only Skin Indications (active) + Recommended Protocols */
+  .page-product-dc .pp-clinical-section .pp-tab-pills .pp-tab-pill:nth-child(2){display:none}
+
+  /* ingredient chips: figma order puts Cyanocobalamin right after Human Exosomes on mobile */
+  .page-product-dc .pp-ing-section .pp-tab-pill:nth-child(2){order:1}
+
+  /* chips/tabs ~15% larger per figma */
+  .page-product-dc .pp-tab-pill{height:50px;padding:0 20px;font-size:15.5px}
+
+  /* dp hero title: figma purple gradient text fill */
+  .page-product-dp .pp-hero-text h1{background:linear-gradient(180deg,#8a5fc7 0%,#6f4c9e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* dp What Is It heading: regular weight like the other section headings */
+  .page-product-dp .pp-overview h2{font-weight:500}
+
+  /* dp Key Ingredients: figma type scale + spacing so the copy fills the card */
+  .page-product-dp .pp-dp-ingredients-section{height:auto!important}
+  .page-product-dp .pp-dp-ingredients-section>.container{height:auto}
+  .page-product-dp .pp-dp-ingredients{height:auto!important;min-height:416px}
+  .page-product-dp .pp-dp-ingredients>div:first-child{height:auto;padding:34px 20px 38px}
+  .page-product-dp .pp-dp-ingredient-list{gap:20px;margin-top:18px}
+  .page-product-dp .pp-dp-ingredient-list h3{font-size:17px;line-height:22px}
+  .page-product-dp .pp-dp-ingredient-list p{font-size:13.5px;line-height:19px}
+
+  /* dp provider contact: pin + text left, dark pill right (figma row) */
+  .page-product-dp .pp-provider-contact{display:flex;height:auto;align-items:center;margin-top:16px;font-size:12.5px;line-height:1.3;text-align:left}
+  .page-product-dp .pp-provider-contact .pp-contact-pill{margin-left:auto;padding:9px 18px;font-size:12.5px}
+}
+
+@media (max-width:560px){
+  /* before/after: the figma asset is exactly 361x361 — drop the desktop min-height:500 that was
+     stretching it into a tight portrait crop; labels back to figma ~22px with a soft shadow */
+  .page-product-dc .pd-ba{min-height:0}
+  .page-product-dc .pd-ba .ba-label{font-size:22px;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+}
+
+
+/* R5-dermaprofessional */
+/* ---------- desktop (figma 1440 master) ---------- */
+@media (min-width:901px){
+  /* Key Technologies: figma shows ONE row of four 308x407 tiles, not a 2x2 of double-width tiles */
+  .page-dermaprofessional .dp-tech-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+  .page-dermaprofessional .dp-tech-grid .feature-card{min-height:407px;grid-column:auto}
+  .page-dermaprofessional .dp-tech-grid .fc-text h4{font-size:22px}
+  .page-dermaprofessional .dp-tech-grid .fc-text p{font-size:13.5px}
+  /* Hero subtitle: figma renders ~24px over 3 tight lines in a ~660px column (measured 39px line advance) */
+  .page-dermaprofessional .dp-fullhero-text p{font-size:24px !important;line-height:1.6;max-width:660px;color:#5e4484}
+  /* Intro card: figma photo is 446x540 (~34% of card) right-aligned with breathing room, live rendered it ~18% wider */
+  .page-dermaprofessional .df-about-media img{width:446px;max-width:100%;height:540px;aspect-ratio:auto;object-fit:cover;margin-left:auto;border-radius:18px}
+}
+
+/* ---------- mobile (figma m_6813, 393w) ---------- */
+@media (max-width:760px){
+  /* hero: centered text first, full-width product render below, no eyebrow badge (figma) */
+  .page-dermaprofessional .dp-fullhero{background:linear-gradient(180deg,#fbf8fe 0%,#efe8f8 100%);padding:6px 0 0}
+  .page-dermaprofessional .dp-fullhero .container{min-height:0}
+  .page-dermaprofessional .dp-fullhero-text{background:none;backdrop-filter:none;border-radius:0;padding:18px 8px 24px;text-align:center}
+  .page-dermaprofessional .dp-fullhero-text .df-eyebrow{display:none}
+  .page-dermaprofessional .dp-fullhero-text h1{font-size:30px;line-height:1.25;margin-bottom:12px}
+  .page-dermaprofessional .dp-fullhero-text p{font-size:14px !important;line-height:1.55;margin:0 auto;max-width:340px}
+  .page-dermaprofessional .dp-fullhero::after{content:"";display:block;position:static;inset:auto;width:100%;aspect-ratio:393/342;background:url('../assets/dp-hero-mobile.jpg') center/cover no-repeat;pointer-events:none}
+  /* intro card: photo renders full width at the top of the card (was collapsing to a tiny floated thumbnail) */
+  .page-dermaprofessional .df-about-grid{display:flex !important;flex-direction:column;gap:16px}
+  .page-dermaprofessional .df-about-media{order:-1;flex-direction:column !important}
+  .page-dermaprofessional .df-about-media img{width:100% !important;max-width:none !important;height:auto !important;aspect-ratio:330/325;object-fit:cover;border-radius:16px;margin:0 !important}
+  /* key technologies: horizontal carousel of 214x283 tiles with right-edge peek (figma), not a static 2x2 grid */
+  .page-dermaprofessional .dp-tech-grid{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .page-dermaprofessional .dp-tech-grid .feature-card{flex:0 0 214px;min-height:283px;scroll-snap-align:start}
+  .page-dermaprofessional .dp-tech-grid .fc-text{padding:18px}
+  .page-dermaprofessional .dp-tech-grid .fc-text h4{font-size:22px}
+  .page-dermaprofessional .dp-tech-grid .fc-text p{font-size:13px}
+  /* explore products: 2-up horizontal carousel of ~230px cards, all four cards, no per-card button (figma) */
+  .page-dermaprofessional .dc-results .pp-rel-grid{display:flex !important;gap:15px;overflow-x:auto;margin-top:26px;padding-bottom:8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .page-dermaprofessional .dc-results .pp-rel-card{flex:0 0 230px;display:flex !important;flex-direction:column;height:auto;padding:0;border:0 !important;background:transparent !important;box-shadow:none;overflow:visible;scroll-snap-align:start}
+  .page-dermaprofessional .dc-results .pp-rel-card:nth-child(n+3){display:flex !important}
+  .page-dermaprofessional .dc-results .figma-card .pp-rel-media,
+  .page-dermaprofessional .dc-results .figma-card-feature .pp-rel-media{height:217px !important;width:100%;aspect-ratio:auto;border-radius:16px;background:#fff;overflow:hidden;position:relative;margin:0;padding:0}
+  .page-dermaprofessional .dc-results .figma-card .pp-rel-media img{width:100%;height:100%;max-height:none;object-fit:contain;filter:none}
+  .page-dermaprofessional .dc-results .pc-link{display:none !important}
+  .page-dermaprofessional .dc-results .figma-card-copy{padding-top:12px;min-height:0}
+  .page-dermaprofessional .dc-results .pp-rel-card h4{margin:0;font-size:15px}
+  .page-dermaprofessional .dc-results .pp-rel-card p{margin:4px 0 0;font-size:12.5px}
+  .page-dermaprofessional .dc-results .section-title{font-size:30px;line-height:1.2}
+  /* why clinics: clean gradient card (no photo bg behind the copy), boxed inline check panel, full-width lineup photo at the card bottom */
+  .page-dermaprofessional .dc-regen>.container{height:auto !important;background:linear-gradient(180deg,#c7bdd9 0%,#ddd7e9 100%);border-radius:16px;overflow:hidden}
+  .page-dermaprofessional .dc-regen-grid{display:block;height:auto !important}
+  .page-dermaprofessional .dc-regen-feature-card{display:grid !important;gap:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.85) !important;border-radius:14px;background:rgba(255,255,255,.42) !important}
+  .page-dermaprofessional .dc-regen-feature-card>div{display:flex !important;align-items:flex-start;gap:10px;height:auto;white-space:normal}
+  .page-dermaprofessional .dc-regen-feature-card .df-check{flex:0 0 auto}
+  .page-dermaprofessional .dc-regen-media{display:block !important;width:auto;height:288px;margin:0;padding:0;border:0;border-radius:0;background:linear-gradient(180deg,#d9d2e6 0,rgba(217,210,230,0) 34px),url('../assets/dp-why-lineup-mobile.jpg') center bottom/cover no-repeat}
+  /* provider CTA: auto height so the foot row stays inside the card; solid dark Contact us pill (figma #302045) */
+  .page-dermaprofessional .provider-cta{height:auto !important;min-height:0 !important;padding:56px 16px !important}
+  .page-dermaprofessional .provider-cta>.container{height:auto}
+  .page-dermaprofessional .provider-cta .provider-panel{height:auto;padding:26px 16px 20px}
+  .page-dermaprofessional .provider-cta .provider-panel>p:not(.provider-foot){height:auto;overflow:visible;margin:14px auto}
+  .page-dermaprofessional .provider-cta .provider-foot{display:flex;align-items:center;gap:6px;height:auto;margin-top:18px;font-size:11.5px;line-height:1.35;text-align:left}
+  .page-dermaprofessional .provider-cta .provider-foot a{margin-left:auto;background:#302045 !important;color:#fff;border-radius:999px;padding:8px 16px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap}
+  /* FAQ: heading + accordions sit directly on the page background on mobile (figma has no wrapper card) */
+  .page-dermaprofessional .df-step .df-step-grid{background:none;border-radius:0;padding:0}
+}
+
+/* ============================================================
+   R6 FIXPACK — self-authored from fleet findings for the 4 groups
+   whose agents lost their inputs to the scratchpad wipe
+   (skin-analyzer, nano-pen, blogs, become-a-provider, actives).
+   ============================================================ */
+
+/* ---------- ACTIVES family (shared classes → all 4 actives/exosomes pages) ---------- */
+/* product renders sit on the page background, larger, no white/gradient card (Figma) */
+.active-adv-media{background:none !important;padding:0;aspect-ratio:auto}
+.active-adv-media img{max-height:none;width:100%;height:auto;object-fit:contain;
+  filter:drop-shadow(0 22px 44px rgba(87,59,126,.14))}
+.active-clin-media{background:none;border-radius:20px;overflow:hidden}
+.active-clin-media img{width:100%;height:100%;object-fit:cover}
+/* SCOPES icon: bolder + larger glyph */
+.active-scope-icon svg{width:60px;height:60px;stroke-width:1.7}
+
+@media (max-width:760px){
+  /* actives mobile: tame oversized body copy that inflated pages ~20-27% */
+  .active-hero p{font-size:15px;line-height:1.5}
+  .active-scopes p,.active-adv p,.active-clin p,.active-adv li,.active-clin li{font-size:14px;line-height:1.5}
+  .active-scopes-panel{padding:26px 18px}
+  .active-scope-item{padding:18px 16px}
+}
+
+/* ---------- BLOGS (desktop) ---------- */
+@media (min-width:901px){
+  .page-blogs .bl-hero h1{font-size:clamp(44px,3.6vw,54px)}
+  .page-blogs .bl-cats-head h2{font-size:44px;font-weight:400}
+  .page-blogs .bl-latest-head h2{font-weight:500}
+  .page-blogs .bl-news-panel h2{line-height:1.18}
+}
+
+/* ---------- NANO-PEN (desktop) ---------- */
+@media (min-width:901px){
+  /* Benefits Over Traditional Tools: larger heading + glass card wrapper */
+  .page-nano-pen .nano-benefits{}
+  .page-nano-pen .nano-benefits h2{font-size:clamp(40px,4.2vw,58px)}
+  .page-nano-pen .nano-benefits-grid{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);
+    border-radius:28px;padding:48px 52px}
+  /* Key Features: top-align content, tighter card */
+  .page-nano-pen .np-keyfeat-card,.page-nano-pen .dev-band-grid{align-items:flex-start}
+}
+/* remove any doubled list marker in the comparison columns (glyph only, no bullet) */
+.page-nano-pen .nano-benefits .np-col ul,
+.page-nano-pen .nano-benefits .np-col li{list-style:none;padding-left:0;margin-left:0}
+.page-nano-pen .nano-benefits .np-col li::marker{content:""}
+
+/* ---------- SKIN-ANALYZER (desktop) ---------- */
+@media (min-width:901px){
+  /* device renders on the section/card background, no opaque white box */
+  .page-skin-analyzer .skin-core-media{background:none !important;padding:0}
+  .page-skin-analyzer .skin-core-media img{width:100%;height:auto;object-fit:contain}
+  /* handheld microimager card: scale heading + copy up toward Figma */
+  .page-skin-analyzer .skin-handheld-card h2{font-size:clamp(34px,3.4vw,44px)}
+  .page-skin-analyzer .shh-sub{font-size:17px}
+  .page-skin-analyzer .shh-lead{font-size:18px}
+  .page-skin-analyzer .shh-list li{font-size:16px}
+  /* hero copy scale */
+  .page-skin-analyzer .device-fullhero-text h1{font-size:clamp(40px,4vw,58px)}
+  .page-skin-analyzer .device-fullhero-text p{font-size:19px;line-height:1.55;max-width:640px}
+  /* 4 Key Features: bigger captions, phones on the white card (no lavender panel) */
+  .page-skin-analyzer .skin-shots figcaption{font-size:16px}
+  .page-skin-analyzer .skin-shots figure{background:none}
+}
+
+/* ---------- BECOME A PROVIDER ---------- */
+/* header CTA: soft lavender filled pill (Figma) */
+.page-become-a-provider .site-header .btn{background:#ede6fa}
+@media (min-width:901px){
+  .page-become-a-provider .bp2-hero h1{font-size:clamp(44px,4.4vw,60px)}
+  .page-become-a-provider .bp2-enquiries h2,.page-become-a-provider .bp2-help-card h2{font-size:clamp(34px,3.4vw,46px)}
+  .page-become-a-provider .bp2-contact span{font-size:13px}
+  .page-become-a-provider .bp2-contact a{font-size:16px}
 }
